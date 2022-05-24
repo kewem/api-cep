@@ -1,7 +1,7 @@
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
+import UsersRouter from "./routes/users.routes";
 
 class App {
   public server: express.Application;
@@ -10,14 +10,7 @@ class App {
     this.server = express();
     this.middleware();
     this.router();
-    this.database();
   }
-
-  private database(): void {
-    mongoose.connect(this.uri!);
-  }
-
-  private uri = process.env.MONGODB_CONNECTION_URL;
 
   private middleware() {
     this.server.use(express.json());
