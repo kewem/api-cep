@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "An API to request informations about CEP from brazilian locations, add data in cache and protect endpoints with some auth process",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/index.ts",
