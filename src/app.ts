@@ -19,6 +19,7 @@ class App {
   }
 
   private router() {
+    this.server.use("/v1/users", UsersRouter);
     this.server.use((req, res, next) => {
       res.status(404);
       res.send({
