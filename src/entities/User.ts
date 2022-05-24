@@ -7,7 +7,7 @@ export class User {
   public name: string;
   public email: string;
 
-  constructor(props: [Omit<User, "id">, Omit<User, "jwt">], id?: string, jwt?: string) {
+  constructor(props: Omit<User, "id" | "jwt">, id?: string, jwt?: string) {
     Object.assign(this, props);
 
     if (!id) {
