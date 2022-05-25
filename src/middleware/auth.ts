@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { JwtPayload, verify } from "jsonwebtoken";
+import { usersRepository } from "../repository/implementations/UsersRepository";
 
-export function JWTCheck(req: Request, res: Response, next: NextFunction) {
+export async function JWTCheck(req: Request, res: Response, next: NextFunction) {
   if (req.method === "OPTIONS") {
     return next();
   }
@@ -18,13 +18,11 @@ export function JWTCheck(req: Request, res: Response, next: NextFunction) {
     throw res.status(400).json({ error: "Authentication failed!" });
   }
 
-  verify(token, `${process.env.JWT_SECRET}`, { complete: true }, async (error, data) => {
-    if (error) {
-      return res.status(400).json({ error: error.message });
-    } else {
-      const payload = data.payload as JwtPayload;
-      console.log(`UserId: ${payload.userId} make an search`);
-      return next();
-    }
-  });
+  const user = await usersRepository.findByToken(token);
+
+  if (!user) {
+    return res.status(400).json({ error: "Unregistered token" });
+  } else {
+    return next();
+  }
 }
