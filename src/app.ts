@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import UsersRouter from "./routes/users.routes";
+import CepRouter from "./routes/cep.routes";
 
 class App {
   public server: express.Application;
@@ -20,6 +21,7 @@ class App {
 
   private router() {
     this.server.use("/v1/users", UsersRouter);
+    this.server.use("/v1/cep", CepRouter);
     this.server.use((req, res, next) => {
       res.status(404);
       res.send({
