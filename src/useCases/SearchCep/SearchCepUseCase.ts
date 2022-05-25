@@ -1,4 +1,4 @@
-import { ICepProvider } from "../../providers/ICepProvider";
+import { ICepProvider } from "../../providers/CepProvider/ICepProvider";
 import { ISearchCepDTO } from "./SearchCepDTO";
 
 export class SearchCepUseCase {

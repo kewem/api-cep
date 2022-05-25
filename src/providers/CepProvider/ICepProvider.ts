@@ -1,4 +1,4 @@
-import { Cep } from "../entities/Cep";
+import { Cep } from "../../entities/Cep";
 
 export interface ICepProvider {
   findCep(cep: string): Promise<Cep>;

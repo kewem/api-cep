@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Cep } from "../../entities/Cep";
+import { Cep } from "../../../entities/Cep";
 import { ICepProvider } from "../ICepProvider";
 
 export class CepProvider implements ICepProvider {
