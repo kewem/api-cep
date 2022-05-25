@@ -1,4 +1,4 @@
-import { CepProvider } from "../../providers/CepProvider/implementations/CepProvider";
+import { CepProvider } from "../../providers/Cep/implementations/CepProvider";
 import { SearchCepController } from "./SearchCepController";
 import { SearchCepUseCase } from "./SearchCepUseCase";
 
