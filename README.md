@@ -97,8 +97,9 @@ O corpo da requisição deve ser do tipo: `application/json`
 #### Retorna um objeto contendo todos os dados sobre um CEP
 
 ```http
-  GET /v1/cep/:cep
+  POST /v1/cep/
 ```
+O corpo da requisição deve ser do tipo: `application/json`
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
@@ -106,9 +107,11 @@ O corpo da requisição deve ser do tipo: `application/json`
 | `token`      | `string` | **Obrigatório**. Incluso no Header `Authorization: Bearer <token>` |
 
 #### Exemplos:
-#### URL da requisição:
-```http
-GET {base_url}/v1/cep/55641-726
+#### Corpo da requisição:
+```json
+{
+    "cep": "69800-000"
+}
 ```
 #### Corpo da resposta:
 ```json
