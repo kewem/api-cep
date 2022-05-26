@@ -4,18 +4,11 @@ import { ICepProvider } from "../ICepProvider";
 
 export class CepProvider implements ICepProvider {
   async findCep(cep: string): Promise<Cep> {
-    if (!this.validateCep(cep)) {
-      return Promise.reject("Invalid CEP. expected something like: xx.xxx-xxx");
+    const result = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
+    if (result.data.erro) {
+      return Promise.reject("Invalid CEP.");
     }
-
-    const sanitizedCep = this.sanitizeCep(cep);
-
-    const result = await axios
-      .get(`https://viacep.com.br/ws/${sanitizedCep}/json/`)
-      
-      if (result.data.erro) {
-        return Promise.reject("Invalid CEP.");
-      }
 
     return new Cep(result.data);
   }
@@ -24,7 +17,7 @@ export class CepProvider implements ICepProvider {
     return cep.replace(/\.|\-/g, "");
   }
 
-  validateCep(cep: string): Boolean {
-    return /\d{2}\.\d{3}\-\d{3}/.test(cep);
+  validateCep(cep: string): boolean {
+    return /\d{5}\-\d{3}/.test(cep);
   }
 }
