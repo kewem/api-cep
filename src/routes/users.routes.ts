@@ -1,13 +1,22 @@
-import { Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
+import { checkSchema, validationResult } from "express-validator";
 import { createUserController } from "../useCases/CreateUser";
 
 const router = Router();
 
-router.post("/", async (request, response, next) => {
-  if(!request.body.name || !request.body.email) {
-    return response.json({error: "You need to provide all required fiels"})
+router.post(
+  "/",
+  checkSchema({
+    name: { isString: true, notEmpty: true },
+    email: { isEmail: true, normalizeEmail: true, notEmpty: true },
+  }),
+  async (request: Request, response: Response, next: NextFunction) => {
+    const errors = validationResult(request);
+    if (!errors.isEmpty()) {
+      return response.status(400).json({ errors: errors.array() });
+    }
+    return await createUserController.handle(request, response, next);
   }
-  return await createUserController.handle(request, response, next);
-});
+);
 
 export default router;
