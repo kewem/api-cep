@@ -18,4 +18,4 @@ class CacheProvider implements ICacheProvider {
   }
 }
 
-const cacheProvider = new CacheProvider();
+export const cacheProvider = new CacheProvider();
