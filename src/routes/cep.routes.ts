@@ -4,7 +4,7 @@ import { JWTCheck } from "../middleware/auth";
 
 const router = Router();
 
-router.get("/:cep", JWTCheck, async (request, response, next) => {
+router.post("/", JWTCheck, async (request, response, next) => {
   return await searchCepController.handle(request, response, next);
 });
 
